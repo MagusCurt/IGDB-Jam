@@ -1,0 +1,130 @@
+[gd_scene load_steps=10 format=3 uid="uid://ywqdmn8dv782"]
+
+[ext_resource type="Script" uid="uid://dsemk0xgj0hmf" path="res://character_body_2d.gd" id="1_0e48y"]
+[ext_resource type="Texture2D" uid="uid://boegm3h2lh815" path="res://icon.svg" id="1_wtcfe"]
+[ext_resource type="Script" uid="uid://b78wpbt6pvtls" path="res://path_follow_2d.gd" id="3_epypp"]
+[ext_resource type="Script" uid="uid://cshbytdx756xk" path="res://button.gd" id="4_0hol4"]
+[ext_resource type="Texture2D" uid="uid://br64d3rdimem5" path="res://space background.png" id="5_q6r6c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0e48y"]
+size = Vector2(375, 52)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_epypp"]
+size = Vector2(124, 122)
+
+[sub_resource type="Curve2D" id="Curve2D_0e48y"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1098.96, 856.154, -496.82, 61.4097, 496.82, -61.4097, 1709.6, 182.202, -89.856, -308.726, 89.856, 308.726, 2556.82, 704.319)
+}
+point_count = 3
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0hol4"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0.713726, 0.533333, 0.509804, 0.847059)
+offset_left = 568.0
+offset_top = -308.0
+offset_right = 3149.0
+offset_bottom = 1354.0
+texture = ExtResource("5_q6r6c")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(960, 510)
+scale = Vector2(10, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(177.5, 16)
+shape = SubResource("RectangleShape2D_0e48y")
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D/CollisionShape2D"]
+offset_left = -189.0
+offset_top = -25.0
+offset_right = 185.0
+offset_bottom = 26.0
+metadata/_edit_use_anchors_ = true
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(1000, 400)
+script = ExtResource("1_0e48y")
+speed = 700.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-2, -3)
+shape = SubResource("RectangleShape2D_epypp")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("1_wtcfe")
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+
+[node name="Path2D" type="Path2D" parent="."]
+scale = Vector2(0.989118, 1.02084)
+curve = SubResource("Curve2D_0e48y")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(1098.96, 856.154)
+rotates = false
+script = ExtResource("3_epypp")
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Path2D/PathFollow2D"]
+remote_path = NodePath("../../AnimatableBody2D")
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="Path2D"]
+position = Vector2(1098.96, 856.154)
+scale = Vector2(1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/AnimatableBody2D"]
+scale = Vector2(10, 1)
+shape = SubResource("RectangleShape2D_0hol4")
+
+[node name="ColorRect" type="ColorRect" parent="Path2D/AnimatableBody2D/CollisionShape2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.184314, 0.254902, 1)
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="GUI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="GUI/Control/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "RESTART"
+script = ExtResource("4_0hol4")
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/Control/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.44
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.95
