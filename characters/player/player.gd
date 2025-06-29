@@ -17,9 +17,10 @@ func _process(delta: float) -> void:
     elif not is_on_floor():
         velocity.y += 1000.0 * delta  # Gravity effect
 
-    if Input.is_action_pressed("space"):
-        TimeSingleton.global_time_scale = -1
-    else:
-        TimeSingleton.global_time_scale = 1
+    if Input.is_action_just_pressed("space"):
+        TimeSingleton.emit_signal("reverse_time")
+
+    elif Input.is_action_just_released("space"):
+        TimeSingleton.emit_signal("continue_time")
 
     move_and_slide()

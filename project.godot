@@ -13,11 +13,12 @@ config_version=5
 config/name="IGDB Jam July 2025"
 run/main_scene="uid://f12cybru01v"
 config/features=PackedStringArray("4.4", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://characters/player/icon.svg"
 
 [autoload]
 
-TimeSingleton="*res://time_singleton.gd"
+TimeSingleton="*res://globals/time_singleton.gd"
+UiSingleton="*res://globals/ui_singleton.gd"
 
 [display]
 
