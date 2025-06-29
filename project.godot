@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="IGDB Jam July 2025"
-run/main_scene="uid://ywqdmn8dv782"
+run/main_scene="uid://f12cybru01v"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -21,8 +21,8 @@ TimeSingleton="*res://time_singleton.gd"
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1020
+window/size/viewport_width=1280
+window/size/viewport_height=720
 
 [input]
 

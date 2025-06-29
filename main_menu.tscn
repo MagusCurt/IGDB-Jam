@@ -1,0 +1,63 @@
+[gd_scene load_steps=2 format=3 uid="uid://f12cybru01v"]
+
+[ext_resource type="Script" uid="uid://tjl8026s1ds5" path="res://main_menu.gd" id="1_06t4h"]
+
+[node name="MainMenu" type="CanvasLayer"]
+script = ExtResource("1_06t4h")
+
+[node name="Main" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Main/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="Main/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.9
+theme_override_constants/margin_left = 190
+theme_override_constants/margin_right = 190
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 19
+
+[node name="Start" type="Button" parent="Main/VBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 60
+text = "START GAME"
+
+[node name="Settings" type="Button" parent="Main/VBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 60
+text = "SETTINGS"
+
+[node name="MarginContainer3" type="MarginContainer" parent="Main/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="pressed" from="Main/VBoxContainer/MarginContainer2/VBoxContainer/Start" to="." method="_on_start_pressed"]
