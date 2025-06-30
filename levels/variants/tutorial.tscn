@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://disg8o8s31tuj"]
+
+[ext_resource type="PackedScene" uid="uid://ywqdmn8dv782" path="res://levels/#base.tscn" id="1_41m8u"]
+[ext_resource type="Script" uid="uid://b78wpbt6pvtls" path="res://levels/path_follow_2d.gd" id="2_x6el4"]
+
+[sub_resource type="Curve2D" id="Curve2D_41m8u"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 53.845, -41.745, -53.845, 41.745, -106, 42, 0, 0, 0, 0, -156, 137)
+}
+point_count = 3
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x6el4"]
+size = Vector2(200, 800)
+
+[node name="Node2D" instance=ExtResource("1_41m8u")]
+
+[node name="Player" parent="." index="2"]
+position = Vector2(1325, 427)
+
+[node name="AnimatableBody2D" parent="Ref Path2D" index="1"]
+position = Vector2(1098.96, 856.154)
+scale = Vector2(1, 1)
+
+[node name="Parallax2D" parent="ParallaxBackgeound" index="0"]
+scroll_offset = Vector2(3, 0)
+
+[node name="Path2D" type="Path2D" parent="." index="6"]
+position = Vector2(1986.63, 400)
+curve = SubResource("Curve2D_41m8u")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D" index="0"]
+rotates = false
+loop = false
+script = ExtResource("2_x6el4")
+speed = 1.4
+rotation_direction = -1
+rotation_max = 90.0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Path2D/PathFollow2D" index="0"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollow2D/StaticBody2D" index="0"]
+position = Vector2(0, -250)
+shape = SubResource("RectangleShape2D_x6el4")
+
+[node name="ColorRect" type="ColorRect" parent="Path2D/PathFollow2D/StaticBody2D" index="1"]
+offset_left = -99.0
+offset_top = -650.0
+offset_right = 102.0
+offset_bottom = 151.0
+color = Color(1, 0.607843, 0.478431, 1)

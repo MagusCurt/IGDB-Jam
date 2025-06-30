@@ -46,28 +46,29 @@ metadata/_edit_use_anchors_ = true
 [node name="Player" parent="." instance=ExtResource("2_ingcu")]
 position = Vector2(1000, 400)
 
-[node name="Path2D" type="Path2D" parent="."]
+[node name="Ref Path2D" type="Path2D" parent="."]
+visible = false
 scale = Vector2(0.989118, 1.02084)
 curve = SubResource("Curve2D_0e48y")
 
-[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+[node name="PathFollow2D" type="PathFollow2D" parent="Ref Path2D"]
 position = Vector2(1098.96, 856.154)
 rotates = false
 loop = false
 script = ExtResource("4_afuap")
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Path2D/PathFollow2D"]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Ref Path2D/PathFollow2D"]
 remote_path = NodePath("../../AnimatableBody2D")
 
-[node name="AnimatableBody2D" type="AnimatableBody2D" parent="Path2D"]
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="Ref Path2D"]
 position = Vector2(1098.96, 856.154)
 scale = Vector2(1, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/AnimatableBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ref Path2D/AnimatableBody2D"]
 scale = Vector2(10, 1)
 shape = SubResource("RectangleShape2D_0hol4")
 
-[node name="ColorRect" type="ColorRect" parent="Path2D/AnimatableBody2D/CollisionShape2D"]
+[node name="ColorRect" type="ColorRect" parent="Ref Path2D/AnimatableBody2D/CollisionShape2D"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -87,7 +88,7 @@ color = Color(1, 0.184314, 0.254902, 1)
 
 [node name="Parallax2D" type="Parallax2D" parent="ParallaxBackgeound"]
 scroll_scale = Vector2(1.5, 1)
-repeat_size = Vector2(1280, 720)
+repeat_size = Vector2(1280, 0)
 repeat_times = 10
 
 [node name="Control" type="Control" parent="ParallaxBackgeound/Parallax2D"]

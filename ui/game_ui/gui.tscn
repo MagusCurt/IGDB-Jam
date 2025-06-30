@@ -121,5 +121,11 @@ size_flags_vertical = 3
 theme_override_font_sizes/font_size = 80
 text = "QUIT"
 
+[node name="Tutorials" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [connection signal="pressed" from="PauseMenu/Panel/MarginContainer/VBoxContainer/Resume" to="PauseMenu" method="_on_resume_pressed"]
 [connection signal="pressed" from="PauseMenu/Panel/MarginContainer/VBoxContainer/Restart" to="PauseMenu" method="_on_restart_pressed"]
