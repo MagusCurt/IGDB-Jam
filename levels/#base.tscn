@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://ywqdmn8dv782"]
+[gd_scene load_steps=9 format=3 uid="uid://ywqdmn8dv782"]
 
 [ext_resource type="Texture2D" uid="uid://br64d3rdimem5" path="res://levels/space background.png" id="1_xpodc"]
 [ext_resource type="PackedScene" uid="uid://8hc7dyykxvqg" path="res://characters/player/player.tscn" id="2_ingcu"]
 [ext_resource type="Script" uid="uid://b78wpbt6pvtls" path="res://levels/path_follow_2d.gd" id="4_afuap"]
 [ext_resource type="PackedScene" uid="uid://hx5gwr64e0n6" path="res://ui/game_ui/gui.tscn" id="5_77yn0"]
+[ext_resource type="Texture2D" uid="uid://btdy51eg76pep" path="res://concept.png" id="5_xpodc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0e48y"]
 size = Vector2(375, 52)
@@ -19,6 +20,7 @@ point_count = 3
 [node name="Node2D" type="Node2D"]
 
 [node name="TextureRect" type="TextureRect" parent="."]
+visible = false
 modulate = Color(0.713726, 0.533333, 0.509804, 0.847059)
 offset_left = 568.0
 offset_top = -308.0
@@ -80,3 +82,16 @@ grow_vertical = 2
 color = Color(1, 0.184314, 0.254902, 1)
 
 [node name="GUI" parent="." instance=ExtResource("5_77yn0")]
+
+[node name="ParallaxBackgeound" type="ParallaxBackground" parent="."]
+
+[node name="Parallax2D" type="Parallax2D" parent="ParallaxBackgeound"]
+scroll_scale = Vector2(1.5, 1)
+repeat_size = Vector2(1280, 0)
+repeat_times = 10
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackgeound/Parallax2D"]
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = ExtResource("5_xpodc")
+expand_mode = 1

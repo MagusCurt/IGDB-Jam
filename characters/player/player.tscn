@@ -18,3 +18,4 @@ shape = SubResource("RectangleShape2D_epypp")
 texture = ExtResource("2_exd8k")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, -140)
