@@ -1,22 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://ywqdmn8dv782"]
+[gd_scene load_steps=7 format=3 uid="uid://ywqdmn8dv782"]
 
 [ext_resource type="Script" uid="uid://cpk2y0ekcvs0t" path="res://levels/#base.gd" id="1_nscqd"]
 [ext_resource type="Texture2D" uid="uid://br64d3rdimem5" path="res://levels/space background.png" id="1_xpodc"]
 [ext_resource type="PackedScene" uid="uid://8hc7dyykxvqg" path="res://characters/player/player.tscn" id="2_ingcu"]
-[ext_resource type="Script" uid="uid://b78wpbt6pvtls" path="res://levels/path_follow_2d.gd" id="4_afuap"]
 [ext_resource type="PackedScene" uid="uid://hx5gwr64e0n6" path="res://ui/game_ui/gui.tscn" id="5_77yn0"]
 [ext_resource type="Texture2D" uid="uid://btdy51eg76pep" path="res://concept.png" id="5_xpodc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0e48y"]
 size = Vector2(375, 52)
-
-[sub_resource type="Curve2D" id="Curve2D_0e48y"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 1098.96, 856.154, -496.82, 61.4097, 496.82, -61.4097, 1709.6, 182.202, -89.856, -308.726, 89.856, 308.726, 2556.82, 704.319)
-}
-point_count = 3
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0hol4"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_nscqd")
@@ -47,42 +38,6 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Player" parent="." instance=ExtResource("2_ingcu")]
 position = Vector2(1000, 400)
-
-[node name="Ref Path2D" type="Path2D" parent="."]
-visible = false
-scale = Vector2(0.989118, 1.02084)
-curve = SubResource("Curve2D_0e48y")
-
-[node name="PathFollow2D" type="PathFollow2D" parent="Ref Path2D"]
-position = Vector2(1098.96, 856.154)
-rotates = false
-loop = false
-script = ExtResource("4_afuap")
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Ref Path2D/PathFollow2D"]
-remote_path = NodePath("../../AnimatableBody2D")
-
-[node name="AnimatableBody2D" type="AnimatableBody2D" parent="Ref Path2D"]
-position = Vector2(1098.96, 856.154)
-scale = Vector2(1, 1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ref Path2D/AnimatableBody2D"]
-scale = Vector2(10, 1)
-shape = SubResource("RectangleShape2D_0hol4")
-
-[node name="ColorRect" type="ColorRect" parent="Ref Path2D/AnimatableBody2D/CollisionShape2D"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(1, 0.184314, 0.254902, 1)
 
 [node name="GUI" parent="." instance=ExtResource("5_77yn0")]
 

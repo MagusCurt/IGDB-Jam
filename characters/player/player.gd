@@ -8,15 +8,20 @@ var mana_loss_rate: float = 80 # Rate at which mana is lost when using time cont
 
 var mana_recovery_rate: float = 60 # Rate at which mana is recovered over time
 
+func _ready() -> void:
+    print_debug(velocity)
+
 func _process(delta: float) -> void:
     # gravity = 1000.0
 
-    if Input.is_action_pressed("right"):
-        velocity.x = speed
-    elif Input.is_action_pressed("left"):
-        velocity.x = -speed
-    else:
-        velocity.x = 0.0
+    # if Input.is_action_pressed("right"):
+    #     velocity.x = speed
+    # elif Input.is_action_pressed("left"):
+    #     velocity.x = -speed
+    # else:
+    #     velocity.x = 0.0
+
+    velocity.x = speed
 
     if Input.is_action_pressed("up") and is_on_floor():
         velocity.y = -400.0  # Jump height
