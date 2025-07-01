@@ -2,6 +2,12 @@ extends CharacterBody2D
 
 @export var speed: float = 200.0
 
+var mana = 100.0
+
+var mana_loss_rate: float = 80 # Rate at which mana is lost when using time control
+
+var mana_recovery_rate: float = 60 # Rate at which mana is recovered over time
+
 func _process(delta: float) -> void:
     # gravity = 1000.0
 
@@ -17,10 +23,22 @@ func _process(delta: float) -> void:
     elif not is_on_floor():
         velocity.y += 1000.0 * delta  # Gravity effect
 
-    if Input.is_action_just_pressed("space"):
-        TimeSingleton.emit_signal("reverse_time")
+    if Input.is_action_pressed("space"):
+        if mana > 0:
+            mana -= mana_loss_rate * delta  # Decrease mana when using time control
+            UiSingleton.player_mana = mana  # Update the UI with current mana
+            TimeSingleton.emit_signal("reverse_time")
+        else:
+            # Optionally, you can handle the case where mana is depleted
+            print("Not enough mana to reverse time.")
+            TimeSingleton.emit_signal("continue_time")  # Stop time control if mana is depleted
 
     elif Input.is_action_just_released("space"):
         TimeSingleton.emit_signal("continue_time")
+    else:
+        # Recover mana over time when not using time control
+        if mana < 100:
+            mana += mana_recovery_rate * delta  # Increase mana when not using time control
+            UiSingleton.player_mana = mana  # Update the UI with current mana
 
     move_and_slide()

@@ -17,10 +17,6 @@ size = Vector2(200, 800)
 [node name="Player" parent="." index="2"]
 position = Vector2(1325, 427)
 
-[node name="AnimatableBody2D" parent="Ref Path2D" index="1"]
-position = Vector2(1098.96, 856.154)
-scale = Vector2(1, 1)
-
 [node name="Parallax2D" parent="ParallaxBackgeound" index="0"]
 scroll_offset = Vector2(3, 0)
 

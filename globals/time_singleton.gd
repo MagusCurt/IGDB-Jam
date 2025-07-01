@@ -7,6 +7,7 @@ signal continue_time
 
 var ui_time : float = 0.0
 
+var level_started: bool = false
 
 func _ready() -> void:
     # Initialize the start time when the game starts
@@ -15,10 +16,14 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-    ui_time += delta * global_time_scale
+    if level_started:
+        ui_time += delta * global_time_scale
 
 func _on_reverse_time() -> void:
-    global_time_scale = -1.0  # Set the time scale to reverse
+    if ui_time <= 0.0:
+        global_time_scale = 0  # Prevent reversing time if already at the start
+    else:
+        global_time_scale = -1.0  # Set the time scale to reverse
 
 func _on_continue_time() -> void:
     global_time_scale = 1.0  # Set the time scale to normal
