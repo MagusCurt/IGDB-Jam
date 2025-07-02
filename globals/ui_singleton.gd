@@ -8,10 +8,9 @@ var player_mana = 100
 
 
 func pause_game() -> void:
-    game_state = "paused"
-    get_tree().paused = true
+	game_state = "paused"
+	get_tree().paused = true
 
 func unpause_game() -> void:
-    game_state = "unpaused"
-    get_tree().paused = false
-
+	game_state = "unpaused"
+	get_tree().paused = false

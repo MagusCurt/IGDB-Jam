@@ -1,19 +1,30 @@
-[gd_scene load_steps=2 format=3 uid="uid://f12cybru01v"]
+[gd_scene load_steps=5 format=3 uid="uid://f12cybru01v"]
 
 [ext_resource type="Script" uid="uid://tjl8026s1ds5" path="res://ui/main_ui/main_menu.gd" id="1_06t4h"]
+[ext_resource type="Script" uid="uid://buhxko7ku46k0" path="res://ui/menu_manager.gd" id="2_ecml6"]
+[ext_resource type="Script" uid="uid://bvrqffhqoju53" path="res://ui/menu_container.gd" id="3_1ytnk"]
+[ext_resource type="Script" uid="uid://d1r2nowf4km2c" path="res://ui/menu_changer_component.gd" id="4_1ytnk"]
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_06t4h")
 
-[node name="Main" type="Control" parent="."]
+[node name="MenuManager" type="Node" parent="." node_paths=PackedStringArray("current_menu")]
+script = ExtResource("2_ecml6")
+current_menu = NodePath("MainMenu")
+metadata/_custom_type_script = "uid://buhxko7ku46k0"
+
+[node name="MainMenu" type="Control" parent="MenuManager"]
+physics_interpolation_mode = 0
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("3_1ytnk")
+metadata/_custom_type_script = "uid://bvrqffhqoju53"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Main"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuManager/MainMenu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,43 +32,80 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Main/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MenuManager/MainMenu/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="MarginContainer2" type="MarginContainer" parent="Main/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="MenuManager/MainMenu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.9
 theme_override_constants/margin_left = 190
 theme_override_constants/margin_right = 190
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Main/VBoxContainer/MarginContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuManager/MainMenu/VBoxContainer/MarginContainer2"]
 layout_mode = 2
 theme_override_constants/separation = 19
 
-[node name="Start" type="Button" parent="Main/VBoxContainer/MarginContainer2/VBoxContainer"]
+[node name="Start" type="Button" parent="MenuManager/MainMenu/VBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 60
 text = "START GAME"
 
-[node name="Settings" type="Button" parent="Main/VBoxContainer/MarginContainer2/VBoxContainer"]
+[node name="Settings" type="Button" parent="MenuManager/MainMenu/VBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 60
 text = "SETTINGS"
 
-[node name="MarginContainer3" type="MarginContainer" parent="Main/VBoxContainer"]
+[node name="MenuChangerComponent" type="Node" parent="MenuManager/MainMenu/VBoxContainer/MarginContainer2/VBoxContainer/Settings" node_paths=PackedStringArray("menu_manager", "move_to_menu")]
+script = ExtResource("4_1ytnk")
+signal_name = "pressed"
+menu_manager = NodePath("../../../../../..")
+move_to_menu = NodePath("../../../../../../SettingsMenu")
+metadata/_custom_type_script = "uid://d1r2nowf4km2c"
+
+[node name="MarginContainer3" type="MarginContainer" parent="MenuManager/MainMenu/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Control" type="Control" parent="."]
+[node name="SettingsMenu" type="Control" parent="MenuManager"]
+physics_interpolation_mode = 0
+visible = false
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_1ytnk")
+metadata/_custom_type_script = "uid://bvrqffhqoju53"
 
-[connection signal="pressed" from="Main/VBoxContainer/MarginContainer2/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[node name="Back" type="Button" parent="MenuManager/SettingsMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -187.5
+offset_top = -45.5
+offset_right = 187.5
+offset_bottom = 45.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 60
+text = "Back"
+
+[node name="MenuChangerComponent" type="Node" parent="MenuManager/SettingsMenu/Back" node_paths=PackedStringArray("menu_manager", "move_to_menu")]
+script = ExtResource("4_1ytnk")
+signal_name = "pressed"
+menu_manager = NodePath("../../..")
+move_to_menu = NodePath("../../../MainMenu")
+metadata/_custom_type_script = "uid://d1r2nowf4km2c"
+
+[connection signal="pressed" from="MenuManager/MainMenu/VBoxContainer/MarginContainer2/VBoxContainer/Start" to="." method="_on_start_pressed"]

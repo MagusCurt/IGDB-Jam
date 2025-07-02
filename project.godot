@@ -19,6 +19,7 @@ config/icon="res://characters/player/icon.svg"
 
 TimeSingleton="*res://globals/time_singleton.gd"
 UiSingleton="*res://globals/ui_singleton.gd"
+TransitionSingleton="*res://globals/transition_singleton/transition_singleton.tscn"
 
 [display]
 
