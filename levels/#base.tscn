@@ -1,45 +1,35 @@
-[gd_scene load_steps=7 format=3 uid="uid://ywqdmn8dv782"]
+[gd_scene load_steps=4 format=3 uid="uid://ywqdmn8dv782"]
 
 [ext_resource type="Script" uid="uid://cpk2y0ekcvs0t" path="res://levels/#base.gd" id="1_nscqd"]
-[ext_resource type="Texture2D" uid="uid://br64d3rdimem5" path="res://levels/space background.png" id="1_xpodc"]
-[ext_resource type="PackedScene" uid="uid://8hc7dyykxvqg" path="res://characters/player/player.tscn" id="2_ingcu"]
-[ext_resource type="PackedScene" uid="uid://hx5gwr64e0n6" path="res://ui/game_ui/gui.tscn" id="5_77yn0"]
 [ext_resource type="Texture2D" uid="uid://btdy51eg76pep" path="res://concept.png" id="5_xpodc"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0e48y"]
-size = Vector2(375, 52)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0l7lg"]
+size = Vector2(400, 50)
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D2" type="Node2D"]
 script = ExtResource("1_nscqd")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-visible = false
-modulate = Color(0.713726, 0.533333, 0.509804, 0.847059)
-offset_left = 568.0
-offset_top = -308.0
-offset_right = 3149.0
-offset_bottom = 1354.0
-texture = ExtResource("1_xpodc")
-
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(960, 510)
-scale = Vector2(10, 1)
+position = Vector2(0, 510)
+scale = Vector2(2, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(177.5, 16)
-shape = SubResource("RectangleShape2D_0e48y")
+position = Vector2(0, 20)
+shape = SubResource("RectangleShape2D_0l7lg")
 
 [node name="ColorRect" type="ColorRect" parent="StaticBody2D/CollisionShape2D"]
-offset_left = -189.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
 offset_top = -25.0
-offset_right = 185.0
-offset_bottom = 26.0
+offset_right = 200.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
 metadata/_edit_use_anchors_ = true
-
-[node name="Player" parent="." instance=ExtResource("2_ingcu")]
-position = Vector2(1000, 400)
-
-[node name="GUI" parent="." instance=ExtResource("5_77yn0")]
 
 [node name="ParallaxBackgeound" type="ParallaxBackground" parent="."]
 

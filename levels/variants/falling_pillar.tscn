@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://disg8o8s31tuj"]
 
-[ext_resource type="PackedScene" uid="uid://ywqdmn8dv782" path="res://levels/#base.tscn" id="1_41m8u"]
-[ext_resource type="Script" uid="uid://b78wpbt6pvtls" path="res://levels/path_follow_2d.gd" id="2_x6el4"]
+[ext_resource type="PackedScene" uid="uid://ywqdmn8dv782" path="res://levels/#base.tscn" id="1_jqlpq"]
+[ext_resource type="Script" uid="uid://b78wpbt6pvtls" path="res://levels/path_follow_2d.gd" id="2_8q81k"]
 
 [sub_resource type="Curve2D" id="Curve2D_41m8u"]
 _data = {
@@ -12,22 +12,19 @@ point_count = 3
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x6el4"]
 size = Vector2(200, 442)
 
-[node name="Node2D" instance=ExtResource("1_41m8u")]
-
-[node name="Player" parent="." index="2"]
-position = Vector2(1168, 432)
+[node name="Node2D" instance=ExtResource("1_jqlpq")]
 
 [node name="Parallax2D" parent="ParallaxBackgeound" index="0"]
 scroll_offset = Vector2(3, 0)
 
-[node name="Path2D" type="Path2D" parent="." index="5"]
-position = Vector2(1987, 364)
+[node name="Path2D" type="Path2D" parent="." index="2"]
+position = Vector2(296, 370)
 curve = SubResource("Curve2D_41m8u")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D" index="0"]
 rotates = false
 loop = false
-script = ExtResource("2_x6el4")
+script = ExtResource("2_8q81k")
 speed = 1.4
 rotation_direction = -1
 rotation_max = 90.0

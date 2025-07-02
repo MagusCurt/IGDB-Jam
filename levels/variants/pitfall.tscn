@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgak88ncr6e5p"]
+
+[ext_resource type="PackedScene" uid="uid://ywqdmn8dv782" path="res://levels/#base.tscn" id="1_w7sfr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0l7lg"]
+size = Vector2(400, 50)
+
+[node name="Node2D2" instance=ExtResource("1_w7sfr")]
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="." index="1"]
+position = Vector2(1600, 510)
+scale = Vector2(2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" index="0"]
+position = Vector2(0, 20)
+shape = SubResource("RectangleShape2D_0l7lg")
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D2/CollisionShape2D" index="0"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -25.0
+offset_right = 200.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true

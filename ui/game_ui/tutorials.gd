@@ -1,12 +1,13 @@
 extends Control
 
-@export var activation_time: float = 0.0
+var activation_time = 0.25
+var tutorial_text = 'HOLD SPACE'
+var input_action = 'space'
 
 var tutorial_active: bool = false
 
-var tutorial_text: String = "HOLD SPACE"
-
 func _process(_delta: float) -> void:
+
     if TimeSingleton.ui_time >= activation_time and !tutorial_active:
         tutorial_active = true
         visible = true
@@ -14,9 +15,9 @@ func _process(_delta: float) -> void:
         %Label.text = tutorial_text
         $AnimationPlayer.play("notice")
 
-    if tutorial_active and Input.is_action_just_pressed("space"):
+    if tutorial_active and Input.is_action_just_pressed(input_action):
         # visible = false
         get_tree().paused = false
-        %Label.text = "WASD or Arrow Keys to Move"
         $AnimationPlayer.stop()
+        visible = false
 

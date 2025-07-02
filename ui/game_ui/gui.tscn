@@ -1,12 +1,28 @@
-[gd_scene load_steps=9 format=3 uid="uid://hx5gwr64e0n6"]
+[gd_scene load_steps=10 format=3 uid="uid://hx5gwr64e0n6"]
 
 [ext_resource type="Script" uid="uid://b3wri5gi74h35" path="res://ui/game_ui/pause_menu.gd" id="1_aqveg"]
+[ext_resource type="Script" uid="uid://b41q61mpeuqy2" path="res://ui/game_ui/gui.gd" id="1_l5hw1"]
 [ext_resource type="Script" uid="uid://mxdbcrsouixe" path="res://ui/game_ui/time.gd" id="2_63fkj"]
 [ext_resource type="Script" uid="uid://bnuvy7xlnc61i" path="res://ui/game_ui/mana_gauge.gd" id="2_mbul1"]
 [ext_resource type="Script" uid="uid://0ap06mj0etmw" path="res://ui/game_ui/tutorials.gd" id="3_3uuxu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k6omp"]
 bg_color = Color(0, 0.262745, 0.501961, 0.227451)
+
+[sub_resource type="Animation" id="Animation_mbul1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_3uuxu"]
 resource_name = "notice"
@@ -25,21 +41,6 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="Animation" id="Animation_mbul1"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mbul1"]
 _data = {
 &"RESET": SubResource("Animation_mbul1"),
@@ -47,6 +48,7 @@ _data = {
 }
 
 [node name="GUI" type="CanvasLayer"]
+script = ExtResource("1_l5hw1")
 
 [node name="Time" type="Control" parent="."]
 layout_mode = 3
@@ -227,7 +229,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_3uuxu")
-activation_time = 0.35
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Tutorials"]
 layout_mode = 1
