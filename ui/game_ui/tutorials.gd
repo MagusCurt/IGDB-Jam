@@ -6,6 +6,10 @@ var input_action = 'space'
 
 var tutorial_active: bool = false
 
+func _ready() -> void:
+    # Connect the tutorial change signal to update the tutorial text and input action
+    UiSingleton.connect("tutorial_change", _on_tutorial_change)
+
 func _process(_delta: float) -> void:
 
     if TimeSingleton.ui_time >= activation_time and !tutorial_active:
@@ -21,3 +25,8 @@ func _process(_delta: float) -> void:
         $AnimationPlayer.stop()
         visible = false
 
+func _on_tutorial_change() -> void:
+    print("Tutorial change signal received")
+    tutorial_text = "UP ARROW or W to JUMP"
+    input_action = "up"  # Update the input action to match the jump action
+    tutorial_active = false  # Reset the tutorial state

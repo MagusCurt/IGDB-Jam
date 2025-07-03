@@ -4,6 +4,8 @@ var game_state: String = "unpaused" # Possible values: "unpaused", "paused", "ga
 
 signal toggle_pause
 
+signal tutorial_change
+
 var player_mana = 100
 
 

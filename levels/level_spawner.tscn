@@ -35,4 +35,8 @@ position = Vector2(1200, 0)
 position = Vector2(1687, 310)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="JumpTutorialTrigger" index="0"]
+position = Vector2(256, 12)
 shape = SubResource("RectangleShape2D_vhkuq")
+
+[connection signal="area_entered" from="JumpTutorialTrigger" to="Player" method="_on_jump_tutorial_trigger_area_entered"]
+[connection signal="body_entered" from="JumpTutorialTrigger" to="Player" method="_on_jump_tutorial_trigger_body_entered"]
