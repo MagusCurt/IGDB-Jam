@@ -60,10 +60,9 @@ size_flags_vertical = 3
 theme_override_font_sizes/font_size = 60
 text = "SETTINGS"
 
-[node name="MenuChangerComponent" type="Node" parent="MenuManager/MainMenu/VBoxContainer/MarginContainer2/VBoxContainer/Settings" node_paths=PackedStringArray("menu_manager", "move_to_menu")]
+[node name="MenuChangerComponent" type="Node" parent="MenuManager/MainMenu/VBoxContainer/MarginContainer2/VBoxContainer/Settings" node_paths=PackedStringArray("move_to_menu")]
 script = ExtResource("4_1ytnk")
 signal_name = "pressed"
-menu_manager = NodePath("../../../../../..")
 move_to_menu = NodePath("../../../../../../SettingsMenu")
 metadata/_custom_type_script = "uid://d1r2nowf4km2c"
 
@@ -101,10 +100,9 @@ size_flags_vertical = 3
 theme_override_font_sizes/font_size = 60
 text = "Back"
 
-[node name="MenuChangerComponent" type="Node" parent="MenuManager/SettingsMenu/Back" node_paths=PackedStringArray("menu_manager", "move_to_menu")]
+[node name="MenuChangerComponent" type="Node" parent="MenuManager/SettingsMenu/Back" node_paths=PackedStringArray("move_to_menu")]
 script = ExtResource("4_1ytnk")
 signal_name = "pressed"
-menu_manager = NodePath("../../..")
 move_to_menu = NodePath("../../../MainMenu")
 metadata/_custom_type_script = "uid://d1r2nowf4km2c"
 

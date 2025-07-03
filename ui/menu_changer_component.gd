@@ -2,7 +2,6 @@ class_name MenuChangerComponent
 extends Node
 
 @export var signal_name : String
-@export var menu_manager : MenuManager
 @export var move_to_menu : MenuContainer
 
 
@@ -17,4 +16,4 @@ func _ready() -> void:
 
 
 func on_signal() -> void:
-	menu_manager.current_menu = move_to_menu
+	move_to_menu.select()
