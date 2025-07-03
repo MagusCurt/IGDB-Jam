@@ -1,6 +1,6 @@
 extends Control
 
-var activation_time = 0.25
+@export var activation_time = 0.25
 var tutorial_text = 'HOLD SPACE'
 var input_action = 'space'
 
@@ -26,7 +26,6 @@ func _process(_delta: float) -> void:
         visible = false
 
 func _on_tutorial_change() -> void:
-    print("Tutorial change signal received")
     tutorial_text = "UP ARROW or W to JUMP"
     input_action = "up"  # Update the input action to match the jump action
     tutorial_active = false  # Reset the tutorial state

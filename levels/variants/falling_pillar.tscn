@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://disg8o8s31tuj"]
+[gd_scene load_steps=6 format=3 uid="uid://disg8o8s31tuj"]
 
 [ext_resource type="PackedScene" uid="uid://ywqdmn8dv782" path="res://levels/#base.tscn" id="1_jqlpq"]
 [ext_resource type="Script" uid="uid://b78wpbt6pvtls" path="res://levels/path_follow_2d.gd" id="2_8q81k"]
@@ -12,29 +12,33 @@ point_count = 3
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x6el4"]
 size = Vector2(200, 442)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jqlpq"]
+size = Vector2(89, 609)
+
 [node name="Node2D" instance=ExtResource("1_jqlpq")]
 
 [node name="Parallax2D" parent="ParallaxBackgeound" index="0"]
 scroll_offset = Vector2(3, 0)
 
 [node name="Path2D" type="Path2D" parent="." index="2"]
-position = Vector2(296, 370)
+position = Vector2(329, 264)
 curve = SubResource("Curve2D_41m8u")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D" index="0"]
 rotates = false
 loop = false
 script = ExtResource("2_8q81k")
-speed = 1.4
-rotation_direction = -1
-rotation_max = 90.0
+min_speed = 1.5
+max_speed = 2.0
 
 [node name="Area2D" type="Area2D" parent="Path2D/PathFollow2D" index="0"]
 position = Vector2(0, 30)
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollow2D/Area2D" index="0"]
 position = Vector2(0, -228)
 shape = SubResource("RectangleShape2D_x6el4")
+debug_color = Color(0.984314, 0, 0, 0.419608)
 
 [node name="ColorRect" type="ColorRect" parent="Path2D/PathFollow2D/Area2D" index="1"]
 offset_left = -99.0
@@ -42,3 +46,13 @@ offset_top = -447.0
 offset_right = 102.0
 offset_bottom = -4.0
 color = Color(1, 0.607843, 0.478431, 1)
+
+[node name="Area2D" type="Area2D" parent="." index="3"]
+position = Vector2(-322, 210)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2(-255, 59)
+shape = SubResource("RectangleShape2D_jqlpq")
+debug_color = Color(6.73831e-07, 0.627768, 0.498773, 0.42)
+
+[connection signal="body_entered" from="Area2D" to="Path2D/PathFollow2D" method="_on_area_2d_body_entered"]

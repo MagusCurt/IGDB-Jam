@@ -6,6 +6,8 @@ signal toggle_pause
 
 signal tutorial_change
 
+var game_over: bool = false
+
 var player_mana = 100
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://8hc7dyykxvqg"]
+[gd_scene load_steps=5 format=3 uid="uid://8hc7dyykxvqg"]
 
 [ext_resource type="Script" uid="uid://dsemk0xgj0hmf" path="res://characters/player/player.gd" id="1_xxgcw"]
 [ext_resource type="Texture2D" uid="uid://boegm3h2lh815" path="res://characters/player/icon.svg" id="2_exd8k"]
@@ -6,10 +6,14 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_epypp"]
 size = Vector2(124, 122)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xxgcw"]
+size = Vector2(128, 128)
+
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_xxgcw")
-speed = 1400.0
+speed = 1000.0
+jump_height = 600.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2, -3)
@@ -20,3 +24,11 @@ texture = ExtResource("2_exd8k")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(0, -140)
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("RectangleShape2D_xxgcw")
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

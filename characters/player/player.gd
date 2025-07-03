@@ -4,27 +4,30 @@ extends CharacterBody2D
 
 var mana = 100.0
 
+@export var gui : CanvasLayer
+	
 var mana_loss_rate: float = 80 # Rate at which mana is lost when using time control
 
-var mana_recovery_rate: float = 60 # Rate at which mana is recovered over time
+@export var mana_recovery_rate: float = 40 # Rate at which mana is recovered over time
+
+@export var jump_height: float = 400.0 # Height of the jump
+
+var ko: bool = false # Knockout state
 
 func _ready() -> void:
 	print_debug(velocity)
 
 func _process(delta: float) -> void:
-	# gravity = 1000.0
 
-	# if Input.is_action_pressed("right"):
-	#     velocity.x = speed
-	# elif Input.is_action_pressed("left"):
-	#     velocity.x = -speed
-	# else:
-	#     velocity.x = 0.0
+	if ko:
+		# If the player is knocked out, stop all movement
+		velocity = Vector2.ZERO
+		return
 
 	velocity.x = speed
 
 	if Input.is_action_pressed("up") and is_on_floor():
-		velocity.y = -400.0  # Jump height
+		velocity.y = -jump_height  # Jump height
 	elif not is_on_floor():
 		velocity.y += 1000.0 * delta  # Gravity effect
 
@@ -48,11 +51,12 @@ func _process(delta: float) -> void:
 
 	move_and_slide()
 
-func _on_jump_tutorial_trigger_area_entered(area:Area2D) -> void:
-	UiSingleton.emit_signal("tutorial_change")
-
-
 func _on_jump_tutorial_trigger_body_entered(body:Node2D) -> void:
 	if body.name == "Player":
 		# Emit the tutorial change signal to update the tutorial text and input action
-		UiSingleton.emit_signal("tutorial_change")
+		UiSingleton.tutorial_change.emit()
+
+func _on_hurt_box_area_entered(area:Area2D) -> void:
+	# change to scene
+	UiSingleton.game_over = true
+	get_tree().change_scene_to_file("res://ui/game_ui/gui.tscn")
