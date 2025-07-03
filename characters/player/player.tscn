@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://8hc7dyykxvqg"]
+[gd_scene load_steps=7 format=3 uid="uid://8hc7dyykxvqg"]
 
 [ext_resource type="Script" uid="uid://dsemk0xgj0hmf" path="res://characters/player/player.gd" id="1_xxgcw"]
 [ext_resource type="Texture2D" uid="uid://boegm3h2lh815" path="res://characters/player/icon.svg" id="2_exd8k"]
+[ext_resource type="AudioStream" uid="uid://dbdisqyf7a38q" path="res://audio/templetheme2.mp3" id="3_5dc8e"]
+[ext_resource type="Script" uid="uid://i3dlse8si3lv" path="res://ui/game_ui/running_theme.gd" id="4_ixbpm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_epypp"]
 size = Vector2(124, 122)
@@ -30,5 +32,13 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("RectangleShape2D_xxgcw")
+
+[node name="RunningTheme" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("3_5dc8e")
+autoplay = true
+parameters/looping = true
+script = ExtResource("4_ixbpm")
+loop_end = 50.85
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

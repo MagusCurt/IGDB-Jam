@@ -25,7 +25,11 @@ func _process(_delta: float) -> void:
         $AnimationPlayer.stop()
         visible = false
 
+        if input_action == 'up':
+                UiSingleton.tutorial_triggered = true  # Mark the tutorial as triggered
+
 func _on_tutorial_change() -> void:
     tutorial_text = "UP ARROW or W to JUMP"
     input_action = "up"  # Update the input action to match the jump action
     tutorial_active = false  # Reset the tutorial state
+    TimeSingleton.ui_time = 2

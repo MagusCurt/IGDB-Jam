@@ -1,9 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://f12cybru01v"]
+[gd_scene load_steps=3 format=3 uid="uid://f12cybru01v"]
 
 [ext_resource type="Script" uid="uid://tjl8026s1ds5" path="res://ui/main_ui/main_menu.gd" id="1_06t4h"]
+[ext_resource type="Texture2D" uid="uid://bcstji1qf3cc3" path="res://ui/main_ui/concept-2.png" id="2_wooop"]
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_06t4h")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_wooop")
 
 [node name="Main" type="Control" parent="."]
 layout_mode = 3

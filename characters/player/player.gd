@@ -30,6 +30,9 @@ func _process(delta: float) -> void:
 		velocity.y = -jump_height  # Jump height
 	elif not is_on_floor():
 		velocity.y += 1000.0 * delta  # Gravity effect
+		if Input.is_action_pressed("down"):
+			# If the player is in the air and pressing down, allow faster descent
+			velocity.y += 1700.0 * delta  # Increase downward velocity when pressing down in the air
 
 	if Input.is_action_pressed("space"):
 		if mana > 0:
@@ -54,7 +57,8 @@ func _process(delta: float) -> void:
 func _on_jump_tutorial_trigger_body_entered(body:Node2D) -> void:
 	if body.name == "Player":
 		# Emit the tutorial change signal to update the tutorial text and input action
-		UiSingleton.tutorial_change.emit()
+		if UiSingleton.tutorial_triggered == false:
+			UiSingleton.tutorial_change.emit()
 
 func _on_hurt_box_area_entered(area:Area2D) -> void:
 	# change to scene

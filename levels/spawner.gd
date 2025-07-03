@@ -31,14 +31,38 @@ func generate() -> void:
 	var random_scene: PackedScene = null
 	var random_number: int = randi() % 4
 
-	if random_number == 0:
-		random_scene = pitfall_scene
-	elif random_number == 1:
-		random_scene = pillar_scene
-	elif random_number == 2:
-		random_scene = basic_scene
+	if TimeSingleton.ui_time < 25:
+
+		if random_number == 0:
+			random_scene = pitfall_scene
+		elif random_number == 1:
+			random_scene = pillar_scene
+		elif random_number == 2:
+			random_scene = basic_scene
+		else:
+			random_scene = crushing_scene
+
 	else:
-		random_scene = crushing_scene
+		#make the basic scene less common after 25 seconds
+		# Use higher range for better probability distribution
+		random_number = randi() % 10
+		if random_number <= 3:  # 40% chance - Most common
+			random_scene = crushing_scene
+		elif random_number <= 5:  # 30% chance - Equal to crushing
+			random_scene = pillar_scene
+		elif random_number <= 7:  # 20% chance - Less common
+			random_scene = pitfall_scene
+		else:  # 10% chance - Least common
+			random_scene = basic_scene
+
+	# Prevent consecutive crushing scenes
+	if level_array.size() > 0:
+		var last_instance = level_array[level_array.size() - 1]
+		# Check if the last generated scene was a crushing scene and current is also crushing
+		if last_instance.scene_file_path == crushing_scene.resource_path and random_scene == crushing_scene:
+			# Replace with pitfall scene instead
+			random_scene = pitfall_scene
+			print_debug("Prevented consecutive crushing scenes") 
 
 	var instance: Node2D = random_scene.instantiate()
 	instance.position = Vector2(generated_length, 0)
