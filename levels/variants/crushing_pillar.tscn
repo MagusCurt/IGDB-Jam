@@ -45,7 +45,7 @@ rotates = false
 loop = false
 script = ExtResource("2_imv0l")
 min_speed = 1.0
-max_speed = 3.0
+max_speed = 2.0
 rotation_max = 0.0
 
 [node name="ColorRect" type="ColorRect" parent="Path2D/PathFollow2D" index="0"]

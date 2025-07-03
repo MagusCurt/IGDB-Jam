@@ -27,6 +27,8 @@ func _process(_delta: float) -> void:
 
         if input_action == 'up':
                 UiSingleton.tutorial_triggered = true  # Mark the tutorial as triggered
+        if input_action == 'space':
+            TimeSingleton.ui_time = 0.5  # Reset UI time when the space action is used
 
 func _on_tutorial_change() -> void:
     tutorial_text = "UP ARROW or W to JUMP"

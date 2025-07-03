@@ -25,7 +25,7 @@ shape = SubResource("RectangleShape2D_epypp")
 texture = ExtResource("2_exd8k")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2(0, -140)
+offset = Vector2(500, -140)
 
 [node name="HurtBox" type="Area2D" parent="."]
 collision_mask = 2

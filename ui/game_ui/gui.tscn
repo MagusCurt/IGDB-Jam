@@ -295,7 +295,7 @@ size_flags_vertical = 4
 [node name="Label" type="Label" parent="GameOverUI/ColorRect/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 120
-text = "U DED ^-^"
+text = "GAME OVER"
 
 [node name="Button" type="Button" parent="GameOverUI/ColorRect/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2

@@ -32,6 +32,9 @@ func _process(delta: float) -> void:
 		velocity.y += 1000.0 * delta  # Gravity effect
 		if Input.is_action_pressed("down"):
 			# If the player is in the air and pressing down, allow faster descent
+			if velocity.y < -200:
+				velocity.y = -200
+
 			velocity.y += 1700.0 * delta  # Increase downward velocity when pressing down in the air
 
 	if Input.is_action_pressed("space"):
