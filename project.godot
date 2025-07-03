@@ -19,12 +19,17 @@ config/icon="res://characters/player/icon.svg"
 
 TimeSingleton="*res://globals/time_singleton.gd"
 UiSingleton="*res://globals/ui_singleton.gd"
+TransitionSingleton="*res://globals/transition_singleton/transition_singleton.tscn"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="viewport"
+
+[gui]
+
+theme/custom="uid://b5rxd0o8yedlh"
 
 [input]
 

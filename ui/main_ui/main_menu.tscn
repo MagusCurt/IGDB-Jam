@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://f12cybru01v"]
+[gd_scene load_steps=6 format=3 uid="uid://f12cybru01v"]
 
 [ext_resource type="Script" uid="uid://tjl8026s1ds5" path="res://ui/main_ui/main_menu.gd" id="1_06t4h"]
 [ext_resource type="Texture2D" uid="uid://bcstji1qf3cc3" path="res://ui/main_ui/concept-2.png" id="2_wooop"]
+[ext_resource type="Script" uid="uid://buhxko7ku46k0" path="res://ui/menu_manager.gd" id="3_6dakb"]
+[ext_resource type="Script" uid="uid://bvrqffhqoju53" path="res://ui/menu_container.gd" id="4_6e2p3"]
+[ext_resource type="Script" uid="uid://d1r2nowf4km2c" path="res://ui/menu_changer_component.gd" id="5_i2wgd"]
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_06t4h")
@@ -14,15 +17,21 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_wooop")
 
-[node name="Main" type="Control" parent="."]
+[node name="MenuManager" type="Node" parent="." node_paths=PackedStringArray("current_menu")]
+script = ExtResource("3_6dakb")
+current_menu = NodePath("Main")
+
+[node name="Main" type="Control" parent="MenuManager"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("4_6e2p3")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Main"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuManager/Main"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,43 +39,116 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Main/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MenuManager/Main/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="MarginContainer2" type="MarginContainer" parent="Main/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="MenuManager/Main/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.9
 theme_override_constants/margin_left = 190
 theme_override_constants/margin_right = 190
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Main/VBoxContainer/MarginContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuManager/Main/VBoxContainer/MarginContainer2"]
 layout_mode = 2
 theme_override_constants/separation = 19
 
-[node name="Start" type="Button" parent="Main/VBoxContainer/MarginContainer2/VBoxContainer"]
+[node name="Start" type="Button" parent="MenuManager/Main/VBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 60
+action_mode = 0
 text = "START GAME"
 
-[node name="Settings" type="Button" parent="Main/VBoxContainer/MarginContainer2/VBoxContainer"]
+[node name="Settings" type="Button" parent="MenuManager/Main/VBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 60
+action_mode = 0
 text = "SETTINGS"
 
-[node name="MarginContainer3" type="MarginContainer" parent="Main/VBoxContainer"]
+[node name="MenuChangerComponent" type="Node" parent="MenuManager/Main/VBoxContainer/MarginContainer2/VBoxContainer/Settings" node_paths=PackedStringArray("move_to_menu")]
+script = ExtResource("5_i2wgd")
+signal_name = "pressed"
+move_to_menu = NodePath("../../../../../../Settings")
+
+[node name="MarginContainer3" type="MarginContainer" parent="MenuManager/Main/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Control" type="Control" parent="."]
+[node name="Settings" type="Control" parent="MenuManager"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_6e2p3")
 
-[connection signal="pressed" from="Main/VBoxContainer/MarginContainer2/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuManager/Settings"]
+layout_mode = 2
+offset_right = 1280.0
+offset_bottom = 720.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer3" type="MarginContainer" parent="MenuManager/Settings/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer4" type="MarginContainer" parent="MenuManager/Settings/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 190
+theme_override_constants/margin_right = 190
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuManager/Settings/VBoxContainer/MarginContainer4"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MenuManager/Settings/VBoxContainer/MarginContainer4/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuManager/Settings/VBoxContainer/MarginContainer4/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Control2" type="Control" parent="MenuManager/Settings/VBoxContainer/MarginContainer4/VBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MenuManager/Settings/VBoxContainer/MarginContainer4/VBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+text = "Volume"
+
+[node name="HSlider" type="HSlider" parent="MenuManager/Settings/VBoxContainer/MarginContainer4/VBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="MenuManager/Settings/VBoxContainer/MarginContainer4/VBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Back" type="Button" parent="MenuManager/Settings/VBoxContainer/MarginContainer4/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 60
+action_mode = 0
+text = "BACK"
+
+[node name="MenuChangerComponent" type="Node" parent="MenuManager/Settings/VBoxContainer/MarginContainer4/VBoxContainer/Back" node_paths=PackedStringArray("move_to_menu")]
+script = ExtResource("5_i2wgd")
+signal_name = "pressed"
+move_to_menu = NodePath("../../../../../../Main")
+
+[node name="MarginContainer" type="MarginContainer" parent="MenuManager/Settings/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="pressed" from="MenuManager/Main/VBoxContainer/MarginContainer2/VBoxContainer/Start" to="." method="_on_start_pressed"]
